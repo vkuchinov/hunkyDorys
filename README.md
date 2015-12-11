@@ -1,5 +1,6 @@
 <b>HONKY-DORYS</b><br>
-<i>by Vladimir V. KUCHINOV</i><br><br>
+<i>by Vladimir V. KUCHINOV<br>
+2015</i><br><br>
 
 [a collection of useful classes for Processing 2.x / 3.x]<br><br>
 
