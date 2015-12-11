@@ -6,8 +6,9 @@
 sortVectorsXYZ:<br>
 
 based on java.util.Collections<br>
-syntax:  1: Collections.sort(ListName, new sortByX());<br>
-	     2: Collections.sort(ListName, compose(new sortByX(), new sortByY()));<br><br>
+syntax:<br><br>
+1: Collections.sort(ListName, new sortByX());<br>
+2: Collections.sort(ListName, compose(new sortByX(), new sortByY()));<br><br>
 	     
 Could be easily extended by a third parameter, just add another children to<br>
 'compose' superclass.<br>
