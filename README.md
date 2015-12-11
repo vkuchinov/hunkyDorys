@@ -1,4 +1,4 @@
-<b>HONKY-DORYS</b><br>
+<h1><b>HONKY-DORYS</b></h1><br>
 <i>by Vladimir V. KUCHINOV<br>
 2015</i><br><br>
 
