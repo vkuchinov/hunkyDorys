@@ -99,7 +99,7 @@ class Node extends PVector{
          else { line(margins_ + this.x * gap_, margins_ + parent_.y * gap_, margins_ + this.x * gap_, margins_ + edges_.maxY * gap_); }
        }
        else{
-       println(parent_);
+    
        stroke(0, 255, 0); strokeWeight(1);
          if(min(this.x, parent_.x) == this.x) { line(margins_ + edges_.minX * gap_, margins_ + this.y * gap_, margins_ + parent_.x * gap_, margins_ + this.y * gap_); } 
          else { line(margins_ + parent_.x * gap_, margins_ + this.y * gap_, margins_ + edges_.maxX * gap_, margins_ + this.y * gap_); }
@@ -196,6 +196,4 @@ public <T> Comparator<T> compose(
         }
     };
 }
-
-
 
