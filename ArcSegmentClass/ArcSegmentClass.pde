@@ -1,7 +1,7 @@
 /*
 
 ARCSEGMENT CLASS
-ideal for Circular Relationship Diagrams
+ideal for Circular Relationship Diagrams [Radial Convergence]
 
 LOTS OF VISUAL REFERENCES:
 https://www.google.ru/search?q=circular+relationship+diagram&newwindow=1&espv=2&biw=1078&bih=670&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjYl5amrt7JAhXFLHIKHad7DsgQ_AUIBigB
