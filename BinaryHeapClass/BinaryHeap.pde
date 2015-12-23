@@ -121,7 +121,7 @@ class BinaryHeap{
   }
   
   void printToConsole() {
-    println("start of content");
+    println("\nstart of content");
     for (int n = 1; n < content.length; n++) {
       print(content[n].value + " ");
     }

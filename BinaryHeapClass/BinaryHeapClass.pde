@@ -22,7 +22,7 @@ http://visualgo.net/
 
 */
 
-Node[] array = new Node[32];
+Node[] array = new Node[8];
 ArrayList<Node> arrayList = new ArrayList();
 
 BinaryHeap heapA; //for array testing
@@ -32,17 +32,28 @@ void setup(){
   
   size(100, 100);
   
-  for(int n = 0; n < 32; n++){
+  
+  for(int n = 0; n < 8; n++){
     
    array[n] = new Node(n, random(0.01, 49.49));
    arrayList.add(new Node(n, random(0.01, 49.49)));
     
   }
   
+  println("\noriginal array:");
+  for(int a = 0; a < array.length; a++){
+    print(array[a].value + " "); 
+  }
+  
   heapA = new BinaryHeap(array);
   heapA.printToConsole();
   heapA.remove(array[7]);
   heapA.printToConsole();
+  
+  println("\noriginal arrayList:");
+  for(int al = 0; al < arrayList.size(); al++){
+    print(arrayList.get(al).value + " "); 
+  }
   
   heapB = new BinaryHeap(arrayList);
   heapB.printToConsole();
