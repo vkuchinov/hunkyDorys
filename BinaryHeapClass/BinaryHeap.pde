@@ -26,14 +26,35 @@ class BinaryHeap{
   content = new Node[size];
   content[0] = new Node(0, Float.NEGATIVE_INFINITY);
    
-  this.createHeap(nodes_);
+  this.createHeapFromArray(nodes_);
     
   }
   
-  void createHeap(Node[] nodes_) {
+  BinaryHeap(ArrayList<Node> nodes_){
+  
+  position = 0;
+  
+  size = nodes_.size() + 1; 
+  content = new Node[size];
+  content[0] = new Node(0, Float.NEGATIVE_INFINITY);
+   
+  this.createHeapFromArrayList(nodes_);
+    
+  }
+  
+  
+  void createHeapFromArray(Node[] nodes_) {
     if (nodes_.length > 0) {
       for (int n = 0; n < nodes_.length; n++) {
         insert(nodes_[n]);
+      }
+    }
+  }
+  
+  void createHeapFromArrayList(ArrayList<Node> nodes_) {
+    if (nodes_.size() > 0) {
+      for (int n = 0; n < nodes_.size(); n++) {
+        insert(nodes_.get(n));
       }
     }
   }

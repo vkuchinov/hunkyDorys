@@ -3,6 +3,10 @@
 Binary Heap class [двои́чная ку́ча]
 [min-heap, could be easily transformed to max-heap]
 
+-----------------------------------
+works both — with Array and ArrayList
+-----------------------------------
+
 based on
 http://eloquentjavascript.net/1st_edition/appendix2.html
 http://algorithms.tutorialhorizon.com/binary-min-max-heap/
@@ -18,8 +22,11 @@ http://visualgo.net/
 
 */
 
-Node[] original = new Node[32];
-BinaryHeap heap;
+Node[] array = new Node[32];
+ArrayList<Node> arrayList = new ArrayList();
+
+BinaryHeap heapA; //for array testing
+BinaryHeap heapB; //for arrayList testing
 
 void setup(){
   
@@ -27,14 +34,20 @@ void setup(){
   
   for(int n = 0; n < 32; n++){
     
-   original[n] = new Node(n, random(0.01, 49.49));
+   array[n] = new Node(n, random(0.01, 49.49));
+   arrayList.add(new Node(n, random(0.01, 49.49)));
     
   }
   
-  heap = new BinaryHeap(original);
-  heap.display();
-  heap.remove(original[7]);
-  heap.display();
+  heapA = new BinaryHeap(array);
+  heapA.display();
+  heapA.remove(array[7]);
+  heapA.display();
+  
+  heapB = new BinaryHeap(arrayList);
+  heapB.display();
+  heapB.remove(arrayList.get(5));
+  heapB.display();
   
 }
 
