@@ -42,7 +42,6 @@ class BinaryHeap{
     
   }
   
-  
   void createHeapFromArray(Node[] nodes_) {
     if (nodes_.length > 0) {
       for (int n = 0; n < nodes_.length; n++) {
@@ -121,12 +120,12 @@ class BinaryHeap{
     sinkDown(index);
   }
   
-  void display() {
+  void printToConsole() {
     println("start of content");
     for (int n = 1; n < content.length; n++) {
       print(content[n].value + " ");
     }
-    println("end of content");
+    println("\nend of content");
   }
   
 }

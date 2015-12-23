@@ -40,14 +40,14 @@ void setup(){
   }
   
   heapA = new BinaryHeap(array);
-  heapA.display();
+  heapA.printToConsole();
   heapA.remove(array[7]);
-  heapA.display();
+  heapA.printToConsole();
   
   heapB = new BinaryHeap(arrayList);
-  heapB.display();
+  heapB.printToConsole();
   heapB.remove(arrayList.get(5));
-  heapB.display();
+  heapB.printToConsole();
   
 }
 
