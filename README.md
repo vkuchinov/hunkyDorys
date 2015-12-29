@@ -9,7 +9,7 @@
 syntaxes:<br>
 1: ArcSegment(float radius_, float position_, float length_, float width_, String caption_, int mode1_, int mode2_);<br>
 
-![alt tag](https://raw.github.com/username/projectname/branch/path/to/img.png)
+![alt tag](https://raw.githubusercontent.com/vkuchinov/hunkyDorys/updated/ArcSegmentClass/screenshot.png)
 
 
 <b>Binary Heap</b><br>
