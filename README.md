@@ -6,7 +6,7 @@
 
 <b>sortVectorsXYZ</b><br>
 <i>based on java.util.Collections</i><br><br>
-syntax:<br>
+syntaxes:<br>
 1: Collections.sort(ListName, new sortByX());<br>
 2: Collections.sort(ListName, compose(new sortByX(), new sortByY()));<br>
 	     
@@ -15,7 +15,7 @@ Could be easily extended by a third parameter, just add another children to<br>
 
 <b>Binary Heap</b><br>
 <i>based on http://eloquentjavascript.net/1st_edition/appendix2.html, works both — with Array and ArrayList</i><br><br>
-syntax:<br>
+syntaxes:<br>
 1: heapA = new BinaryHeap(array);<br>
 2: heapB = new BinaryHeap(arrayList);<br>
 
