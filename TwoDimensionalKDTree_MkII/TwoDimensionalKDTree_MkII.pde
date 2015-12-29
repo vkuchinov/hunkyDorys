@@ -3,7 +3,6 @@
 TWO DIMENSIONAL KD TREE
 [based on Wikipedia article]
 
-
 Balancing KD Tree is an alternative algorithm that builds a balanced k-d tree by presorting
 the data in each of k dimensions prior to building the tree. 
 
@@ -17,9 +16,9 @@ the data in each of k dimensions prior to building the tree.
 
 REFERENCES & FURTHER READINGS:
 https://en.wikipedia.org/wiki/K-d_tree
-http://rosettacode.org/wiki/K-d_tree#Faster_Alternative_Version
 http://andrewd.ces.clemson.edu/courses/cpsc805/references/nearest_search.pdf
-
+http://rosettacode.org/wiki/K-d_tree#Faster_Alternative_Version [nice set of algorithms]
+http://christopherstoll.org/2011/09/k-d-tree-nearest-neighbor-search.html [Great visual explanation of distance search]
 
 Orchard’s Algorithm (1991)
 Principal Component Partitioning (PCP) (1999)

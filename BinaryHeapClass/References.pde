@@ -114,4 +114,38 @@ public class minHeap {
 
 }
 
+______________________________________________________
+
+Hypothesis: -e[1] should be the first value of BinaryHeap while e[0] is -infinity;
+bestNodes = new BinaryHeap( function (e) { return -e[1]; } );
+
+metric(a, b){
+  
+dx = a.x - b.x;
+dy = a.y - b.y;
+
+return pow(dx, 2) + pow(dy, 2);
+  
+}
+
+a: 444.8548, 47.1749
+b: 367.7584, 128.3530
+
+dx: 444.8548 - 367.7584 = 77.0964; // ^2 5943.8549
+dy: -81.1781;                      // ^2 6589.8839
+
+dist(a, b) = 12533.7388
+
+console.log(-e[1]) returns series for 444.8548, 47.1749:
+-4959.612003530001
+-1763.8684562499993
+-4959.612003530001
+-7809.584491249998
+-1763.8684562499993
+-4959.612003530001
+0
+
+console.log(-e[1]) returns series for 212.2, 333.95:
+
+
 */
