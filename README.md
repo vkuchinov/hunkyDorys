@@ -8,7 +8,7 @@
 <i>based on java.util.Collections</i><br><br>
 syntax:<br>
 1: Collections.sort(ListName, new sortByX());<br>
-2: Collections.sort(ListName, compose(new sortByX(), new sortByY()));<br><br>
+2: Collections.sort(ListName, compose(new sortByX(), new sortByY()));<br>
 	     
 Could be easily extended by a third parameter, just add another children to<br>
 'compose' superclass.<br><br>
