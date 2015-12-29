@@ -7,8 +7,9 @@
 <b>ArcSegment Class</b><br>
 <i>good for Circular Relationship Diagram [radial convergences]</i><br><br>
 syntaxes:<br>
-1: heapA = new BinaryHeap(array);<br>
-2: heapB = new BinaryHeap(arrayList);<br>
+1: ArcSegment(float radius_, float position_, float length_, float width_, String caption_, int mode1_, int mode2_);<br>
+
+![alt tag](https://raw.github.com/username/projectname/branch/path/to/img.png)
 
 
 <b>Binary Heap</b><br>
