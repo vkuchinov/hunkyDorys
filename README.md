@@ -19,6 +19,5 @@ syntax:<br>
 1: heapA = new BinaryHeap(array);<br>
 2: heapB = new BinaryHeap(arrayList);<br>
 
-Could be easily extended by a third parameter, just add another children to<br>
-
+Works as min-heap, could be easily transformed to max-heap.
 
