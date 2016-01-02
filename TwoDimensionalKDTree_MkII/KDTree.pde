@@ -10,6 +10,11 @@
  this.parent = parent;
  this.dimension = dimension;
  
+ [-] shoud I create a new instance of KDTree each time?
+     JavaScript example by Ubilabs does.
+     
+     And my script does. 
+ 
  */
 
 class KDTree {
@@ -61,22 +66,62 @@ class KDTree {
       //median.display(255, 1, 0, 2, level, parent, edges);
 
       //graph mode display
-      median.displayGraph(255, 1, 0, 8, level, parent);
+      //median.displayGraph(255, 1, 0, 8, level, parent);
 
       left = splitNodeList(nodes_, 0, medianIndex);
       right = splitNodeList(nodes_, medianIndex + 1, nodes_.size());
 
       //KDTree(NodeList nodes_, int level, Node parent_)
-      if (left.size() != 0 || left != null) children[0] = new KDTree(left, level + 1, (Node)median, edges);
-      if (right.size() != 0 || right != null) children[1] = new KDTree(right, level + 1, (Node)median, edges);
+      if (left.size() != 0 || left != null) { children[0] = new KDTree(left, level + 1, (Node)median, edges); } else { children[0] = null; }
+      if (right.size() != 0 || right != null) { children[1] = new KDTree(right, level + 1, (Node)median, edges); } else { children[1] = null; }
     }
   }
 
   //look for given number of closest neighbours
-  NodeList neighboursByK(Node point_, int k_) {
+  NodeList neighboursByK(Node point_, int k_, int level_) {
 
-    NodeList output = new NodeList();
+    /*
+    
+    SUB-TASKS
+    
+    [-] for graph, distance is not dist(x, y, x1, y1), but (x1 - x)^2 + (y1 - y_)^2
+        e.g: for 6,3 and 9,6 distance is not 4.31, but 18.
+    
+    [D] distance instead of x, y values
+    [-] first iteration: set the best neighbour in it
+    [-] should be recursive... [level in parameters] 
 
+    [D] dead end
+  
+    */
+    
+    NodeList output = new NodeList();          //results
+    float[] minDistance = setToMax(k_);        //best nieghhbours array
+    float tmpDistance = Float.MAX_VALUE;       //test value
+    KDTree bestNode;                           //tree segment where best node is median
+    
+    //left: children[0], right: children[1]
+    
+    if(children[0].median != null && children[1].median != null){
+          
+            //float leftDistance = new PVector(point_.x, point_.y).dist(new PVector(children[0].median.x, children[0].median.y));
+            //float rightDistance = new PVector(point_.x, point_.y).dist(new PVector(children[1].median.x, children[1].median.y));
+            //check for x value
+            //point_.x
+            if(leftDistance < rightDistance) { children[0].neighboursByK(point_, k_, level_ + 1); println(children[0].median + "leftX"); } 
+            else {
+            children[1].neighboursByK(point_, k_, level_ + 1); println(children[1].median + "rightX"); }
+        
+       
+    }
+    else if(children[0].median != null){ 
+      
+       //if there is only one (left) children
+       children[0].neighboursByK(point_, k_, level_ + 1);
+       println(children[0].median + "left end");
+       
+    }
+    
     return output;
     
   }
@@ -127,6 +172,20 @@ class KDTree {
     return output;
   }
 
+
+  float[] setToMax(int k_){
+   
+     float[] output = new float[k_];
+    
+     for(int f = 0; f < output.length; f++){
+      
+       output[f] = Float.MAX_VALUE;
+      
+     }
+    
+     return output; 
+    
+  }
 
   int getMaxIndexFromTwo(int level_, Node n1_, int n1Index_, Node n2_, int n2Index_) {
 

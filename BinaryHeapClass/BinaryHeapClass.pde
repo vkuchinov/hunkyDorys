@@ -1,7 +1,7 @@
 /*
 
 Binary Heap class [двои́чная ку́ча]
-[min-heap, could be easily transformed to max-heap]
+[min-heap and max-heap, by last parameter]
 
 -----------------------------------
 works both — with Array and ArrayList
@@ -19,6 +19,8 @@ https://en.wikipedia.org/wiki/Binary_heap
 
 FURTHER READINGS:
 http://visualgo.net/
+
+[-] do min/max searches
 
 */
 
@@ -45,7 +47,7 @@ void setup(){
     print(array[a].value + " "); 
   }
   
-  heapA = new BinaryHeap(array);
+  heapA = new BinaryHeap(array, "min");
   heapA.printToConsole();
   heapA.remove(array[7]);
   heapA.printToConsole();
@@ -55,7 +57,7 @@ void setup(){
     print(arrayList.get(al).value + " "); 
   }
   
-  heapB = new BinaryHeap(arrayList);
+  heapB = new BinaryHeap(arrayList, "min");
   heapB.printToConsole();
   heapB.remove(arrayList.get(5));
   heapB.printToConsole();

@@ -3,6 +3,8 @@
 binary heap size is always should be considered as size + 1 
 because index 0 will be empty or -infinity.
 
+[-] do min/max searches
+
 */
 
 class BinaryHeap{
@@ -18,25 +20,31 @@ class BinaryHeap{
   Node[] content;
   int position = 0;
   
-  BinaryHeap(Node[] nodes_){
+  boolean type = false;  //max: true, min: false;
+  
+  BinaryHeap(Node[] nodes_, String type_){
+  
+  if(type_ == "max") type = true;
   
   position = 0;
   
   size = nodes_.length + 1; 
   content = new Node[size];
-  content[0] = new Node(0, Float.NEGATIVE_INFINITY);
+  if(type) { content[0] = new Node(0, Float.POSITIVE_INFINITY); } else { content[0] = new Node(0, Float.NEGATIVE_INFINITY); }
    
   this.createHeapFromArray(nodes_);
     
   }
   
-  BinaryHeap(ArrayList<Node> nodes_){
+  BinaryHeap(ArrayList<Node> nodes_, String type_){
+  
+  if(type_ == "max") type = true;
   
   position = 0;
   
   size = nodes_.size() + 1; 
   content = new Node[size];
-  content[0] = new Node(0, Float.NEGATIVE_INFINITY);
+  if(type) { content[0] = new Node(0, Float.POSITIVE_INFINITY); } else { content[0] = new Node(0, Float.NEGATIVE_INFINITY); }
    
   this.createHeapFromArrayList(nodes_);
     

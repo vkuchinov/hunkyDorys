@@ -93,7 +93,11 @@ void draw(){
  
   //KDTree(NodeList nodes_, int level, Node parent_)
   KDTree tree = new KDTree(nodes, 0, null, null);
-  sentinels = tree.neighboursByK(snitch, 3);
+  sentinels = tree.neighboursByK(snitch, 3, 0);
+  
+  stroke(128, 0, 128);
+  strokeWeight(3);
+  point(snitch.x, snitch.y);
   
   for(int s = 0; s < sentinels.size(); s++){
     
@@ -103,6 +107,8 @@ void draw(){
     line(snitch.x, snitch.y, tmp.x, tmp.y);
     
   }
+ 
+ noLoop();
   
 }
 
