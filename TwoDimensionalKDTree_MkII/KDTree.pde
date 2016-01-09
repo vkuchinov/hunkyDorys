@@ -84,8 +84,11 @@ class KDTree {
     
     SUB-TASKS
     
-    [-] for graph, distance is not dist(x, y, x1, y1), but (x1 - x)^2 + (y1 - y_)^2
-        e.g: for 6,3 and 9,6 distance is not 4.31, but 18.
+    [-] e.g: for 6,3 and 9,6 distance is not 4.31, but 18.
+        sqrt(18) is 4.31.
+        
+        The question is why we need pow(n, 2) compare to x and y
+        
     
     [D] distance instead of x, y values
     [-] first iteration: set the best neighbour in it
