@@ -1,6 +1,6 @@
 /*
 
-  getHeximals() method
+  getHexadecimal() method
   
   return char array fill with 0-9, A-F
   could be modified to feed an array with all 
@@ -15,12 +15,12 @@
 
 void setup() {
   
-  char[] chars = getHeximals();
+  char[] chars = getHexadecimals();
   println(chars);
   
 }
 
-char[] getHeximals(){
+char[] getHexadecimals(){
   
   char[] output = new char[16];
   
