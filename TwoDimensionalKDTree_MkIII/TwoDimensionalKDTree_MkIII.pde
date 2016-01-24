@@ -109,15 +109,14 @@ void setup(){
   
   size(600, 600, "processing.core.PGraphicsRetina2D");
   frameRate(30);
-  
+
   velocity = new PVector(random(-4, 4), random(-4, 4));
   
-  for(int n = 0; n < 1024; n++){
-    
-    //nodes.add(new Node(n, references[n][0],  references[n][1], new PVector(0, 0)));
-    nodes.add(new Node(n, (int)random(0, 800), (int)random(0, 800), new PVector(random(0, 0), random(0, 0))));
+  for(int n = 0; n < 32; n++){  
+    nodes.add(new Node(n, references[n][0],  references[n][1], new PVector(0, 0)));
+    //nodes.add(new Node(n, (int)random(0, 800), (int)random(0, 800), new PVector(random(0, 0), random(0, 0))));
   }
-
+  
   snitch = new Node(-1, 212.2, 333.95, new PVector(0, 0));
 
 }
@@ -131,7 +130,9 @@ void draw(){
  
   //KDTree(NodeList nodes_, int level, Node parent_)
   KDTree tree = new KDTree(nodes, 0);
-  sentinels = tree.neighboursByK(snitch, 3, 0);
+  //tree.displayTree();
+  
+  sentinels = tree.neighboursByK(snitch, 3);
   
   stroke(128, 0, 128);
   strokeWeight(10);
@@ -152,69 +153,71 @@ void draw(){
  snitch.x += velocity.x; snitch.y += velocity.y;
  Node nn = new Node(0, 0.0, 0.0, new PVector(0, 0));
   
- HashMap<Float, Integer> unsortedNeighbours = new HashMap<Float, Integer>();
- 
- float minDist = Float.MAX_VALUE;
- 
- for(int n = 0; n < nodes.size(); n++){
-    Node tmp = (Node)nodes.get(n);
-    unsortedNeighbours.put(dist(snitch.x, snitch.y, tmp.x, tmp.y), n);   
-  }
-  
-  //println("unsorted:", unsortedNeighbours);
-  SortedMap<Float, Integer> sortedNeighbours = new TreeMap<Float, Integer>();
-  SortedMap<Float, Integer> radialNeighbours = new TreeMap<Float, Integer>();
-  
-  sortedNeighbours.putAll(unsortedNeighbours);
-  //println("sorted:", sortedNeighbours);
-  
-  /*
-  
-  java.util.SortedMap:
-
-  subMap(K fromKey, K toKey): Returns a view of the portion of this Map whose keys 
-                              range from fromKey, inclusive, to toKey, exclusive.
-  headMap(K toKey): Returns a view of the portion of this Map whose keys are strictly 
-                    less than toKey.
-
-  tailMap(K fromKey): Returns a view of the portion of this Map whose keys are greater 
-                      than or equal to fromKey.
-  
-  */
-  
-  //by radius
-  
-   float RAD = 75.0;
-   radialNeighbours = sortedNeighbours.headMap(RAD);
-   Integer[] R = radialNeighbours.values().toArray(new Integer[radialNeighbours.size()]);
-   
-   for(int r = 0; r < radialNeighbours.size(); r++){
-      Node tmp = (Node)nodes.get(R[r]);
-      noFill();
-      strokeWeight(1.0);
-      stroke(255, 255, 0);
-      ellipseMode(CENTER);
-      ellipse(snitch.x, snitch.y, RAD * 2, RAD * 2);
-      strokeWeight(2.0);
-      line(snitch.x, snitch.y, tmp.x, tmp.y);
-  }
-  
-  
-  //by K (# of neighbours)
-  int N = 5;
-  Integer[] K = sortedNeighbours.values().toArray(new Integer[N]);
-  
-  for(int k = 0; k < N; k++){
-      Node tmp = (Node)nodes.get(K[k]);
-      stroke(255, 0, 255);
-      strokeWeight(2.0);
-      line(snitch.x, snitch.y, tmp.x, tmp.y);
-  }
+      // HashMap<Float, Integer> unsortedNeighbours = new HashMap<Float, Integer>();
+      // 
+      // float minDist = Float.MAX_VALUE;
+      // 
+      // for(int n = 0; n < nodes.size(); n++){
+      //    Node tmp = (Node)nodes.get(n);
+      //    unsortedNeighbours.put(dist(snitch.x, snitch.y, tmp.x, tmp.y), n);   
+      //  }
+      //  
+      //  //println("unsorted:", unsortedNeighbours);
+      //  SortedMap<Float, Integer> sortedNeighbours = new TreeMap<Float, Integer>();
+      //  SortedMap<Float, Integer> radialNeighbours = new TreeMap<Float, Integer>();
+      //  
+      //  sortedNeighbours.putAll(unsortedNeighbours);
+      //  //println("sorted:", sortedNeighbours);
+      //  
+      //  /*
+      //  
+      //  java.util.SortedMap:
+      //
+      //  subMap(K fromKey, K toKey): Returns a view of the portion of this Map whose keys 
+      //                              range from fromKey, inclusive, to toKey, exclusive.
+      //  headMap(K toKey): Returns a view of the portion of this Map whose keys are strictly 
+      //                    less than toKey.
+      //
+      //  tailMap(K fromKey): Returns a view of the portion of this Map whose keys are greater 
+      //                      than or equal to fromKey.
+      //  
+      //  */
+      //  
+      //  //by radius
+      //  
+      //   float RAD = 75.0;
+      //   radialNeighbours = sortedNeighbours.headMap(RAD);
+      //   Integer[] R = radialNeighbours.values().toArray(new Integer[radialNeighbours.size()]);
+      //   
+      //   for(int r = 0; r < radialNeighbours.size(); r++){
+      //      Node tmp = (Node)nodes.get(R[r]);
+      //      noFill();
+      //      strokeWeight(1.0);
+      //      stroke(255, 255, 0);
+      //      ellipseMode(CENTER);
+      //      ellipse(snitch.x, snitch.y, RAD * 2, RAD * 2);
+      //      strokeWeight(2.0);
+      //      line(snitch.x, snitch.y, tmp.x, tmp.y);
+      //  }
+      //  
+      //  
+      //  //by K (# of neighbours)
+      //  int N = 5;
+      //  Integer[] K = sortedNeighbours.values().toArray(new Integer[N]);
+      //  
+      //  for(int k = 0; k < N; k++){
+      //      Node tmp = (Node)nodes.get(K[k]);
+      //      stroke(255, 0, 255);
+      //      strokeWeight(2.0);
+      //      line(snitch.x, snitch.y, tmp.x, tmp.y);
+      //  }
   
   fill(255, 0, 255);
   text("K: by # of neighbours", 20, 20);
   fill(255, 255, 0);
   text("radius: by radius", 150, 20);
+  
+  //noLoop();
   
 }
 

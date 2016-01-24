@@ -57,28 +57,19 @@ class KDTree {
         medianIndex = getMaxIndexFromTwo(level, (Node)nodes_.get(floor(nodes_.size() / 2)), floor(nodes_.size() / 2), (Node)nodes_.get(floor(nodes_.size() / 2 - 1)), floor(nodes_.size() / 2 - 1)) ;
       }
 
-      //      if (level == 0) { 
-      //        edges = new Bounds(0, width, 0, height);
-      //      } else {
-      //        edges = getEdges(level, median, parent, parentEdges_);
-      //      }
+      treemap[round(nodes_.size() / 2.0)] = median.index;
 
-      //display(int color_, int gap_, int margins_, int weight_, int dim_, Node parent_)
-      //median.display(255, 1, 0, 2, level, parent, edges);
-
-      //graph mode display
-      //median.displayGraph(255, 1, 0, 8, level, parent);
-
+   
       left = splitNodeList(nodes_, 0, medianIndex);
       right = splitNodeList(nodes_, medianIndex + 1, nodes_.size());
 
       //KDTree(NodeList nodes_, int level, Node parent_)
-      if (left.size() != 0 || left != null) { children[0] = new KDTree(left, level + 1, (Node)median, treemap); } else { children[0] = null; }
-      if (right.size() != 0 || right != null) { children[1] = new KDTree(right, level + 1, (Node)median, treemap); } else { children[1] = null; }
+      if (left.size() != 0 || left != null) { children[0] = new KDTree(left, level + 1, (Node)median, treemap, round(nodes_.size() / 2), 0); } else { children[0] = null; }
+      if (right.size() != 0 || right != null) { children[1] = new KDTree(right, level + 1, (Node)median, treemap, round(nodes_.size() / 2), 1); } else { children[1] = null; }
     }
   }
 
-  KDTree(NodeList nodes_, int level_, Node parent_, int[] treemap_) {
+  KDTree(NodeList nodes_, int level_, Node parent_, int[] treemap_, int treepos_, int lr_) {
     
     parent = parent_;
     level = level_;
@@ -98,30 +89,33 @@ class KDTree {
         median = getMaxFromTwo(level, (Node)nodes_.get(floor(nodes_.size() / 2)), (Node)nodes_.get(floor(nodes_.size() / 2 - 1))); 
         medianIndex = getMaxIndexFromTwo(level, (Node)nodes_.get(floor(nodes_.size() / 2)), floor(nodes_.size() / 2), (Node)nodes_.get(floor(nodes_.size() / 2 - 1)), floor(nodes_.size() / 2 - 1)) ;
       }
-
-      //      if (level == 0) { 
-      //        edges = new Bounds(0, width, 0, height);
-      //      } else {
-      //        edges = getEdges(level, median, parent, parentEdges_);
-      //      }
-
-      //display(int color_, int gap_, int margins_, int weight_, int dim_, Node parent_)
-      //median.display(255, 1, 0, 2, level, parent, edges);
-
-      //graph mode display
-      //median.displayGraph(255, 1, 0, 8, level, parent);
+      
+      //treemap
+      int currentpos;
+      
+      if(lr_ == 0) { treemap_[treepos_ - round(nodes_.size()/2.0)] = median.index; currentpos = treepos_ - round(nodes_.size()/2.0);}   //left
+      else { treemap_[treepos_ + round(nodes_.size()/2.0)] = median.index; currentpos = treepos_ + round(nodes_.size()/2.0);}           //right
 
       left = splitNodeList(nodes_, 0, medianIndex);
       right = splitNodeList(nodes_, medianIndex + 1, nodes_.size());
 
       //KDTree(NodeList nodes_, int level, Node parent_)
-      if (left.size() != 0 || left != null) { children[0] = new KDTree(left, level + 1, (Node)median, treemap); } else { children[0] = null; }
-      if (right.size() != 0 || right != null) { children[1] = new KDTree(right, level + 1, (Node)median, treemap); } else { children[1] = null; }
+      if (left.size() != 0 || left != null) { children[0] = new KDTree(left, level + 1, (Node)median, treemap_, currentpos, 0); } else { children[0] = null; }
+      if (right.size() != 0 || right != null) { children[1] = new KDTree(right, level + 1, (Node)median, treemap_, currentpos, 1); } else { children[1] = null; }
     }
+    
   }
 
+  void displayTree(){
+    println("");
+    for(int n = 0; n < this.treemap.length - 1; n++){
+       print(n + ": " + treemap[n] + ", ");
+    }
+    print(this.treemap.length - 1 + ": " + treemap[this.treemap.length - 1]);
+  }
+  
   //look for given number of closest neighbours
-  NodeList neighboursByK(Node point_, int k_, int level_) {
+  NodeList neighboursByK(Node point_, int k_) {
 
     /*
     
@@ -138,42 +132,79 @@ class KDTree {
     [-] should be recursive... [level in parameters] 
 
     [D] dead end
+    
+    'sorted' array through building KD Tree
+
+    L, U pointers [indexers] 
+           L                          U
+    [n1][n4][n8][n9][.....][n2][n3][n7][n6]
   
+    median = (L + U - 1) / 2
+    
+    Throughout the searching for # of neighbpurs, you have to compare
+    the worst distance out of n-bests, while searching by radius —
+    radius itself (r2).
+  
+    should be recursive as well
     */
     
-    NodeList output = new NodeList();          //results
-    float[] minDistance = setToMax(k_);        //best nieghhbours array
-    float tmpDistance = Float.MAX_VALUE;       //test value
-    KDTree bestNode;                           //tree segment where best node is median
+    ArrayList<Integer> path = new ArrayList<Integer>();  //path
+    NodeList output = new NodeList();                    //results
     
-    //left: children[0], right: children[1]
+    int median;  //current median
+                 //median = round((L + U) / 2.0)
+                 
+    int L, U; //lower and upper indexers
+              //this.treemap: sorted array
+
+    //size: k (k_)              
+    SortedMap<Float, Node> neighboursByK = new TreeMap<Float, Node>();
     
-    if(children[0].median != null && children[1].median != null){
-          
-            //float leftDistance = new PVector(point_.x, point_.y).dist(new PVector(children[0].median.x, children[0].median.y));
-            //float rightDistance = new PVector(point_.x, point_.y).dist(new PVector(children[1].median.x, children[1].median.y));
-            //check for x value
-            //point_.x
-            //if(leftDistance < rightDistance) { children[0].neighboursByK(point_, k_, level_ + 1); println(children[0].median + "leftX"); } 
-            //else {
-            //children[1].neighboursByK(point_, k_, level_ + 1); println(children[1].median + "rightX"); }
-        
-       
+    L = 0;
+    U = this.treemap.length - 1;
+    median = round((U + L) / 2.0);
+
+    if(path.size() != 0 || path.size() % 2 == 0){ // X
+        path.add(median);
+        Node n = (Node)nodes.get(treemap[median]);
+        if(point_.x < n.x){ //go left
+        println("less");
+        }
+        else //go right
+        {
+        println("more");
+        }
     }
-    else if(children[0].median != null){ 
-      
-       //if there is only one (left) children
-       children[0].neighboursByK(point_, k_, level_ + 1);
-       println(children[0].median + "left end");
-       
+    else // Y
+    {
+        path.add(median);
     }
-    
+    //    //level: 0: x, 1: y comparing
+    //    if < goes left, otherwise right
+    //    //have to check only left
+    //    //there is no children in array...!!!
+    //    //have to solve it with L, U (shoul be same...)
+    //    //while(L == U)
+    //    recursive, recursive.... with callback
+    //    while(....children != null...){
+    //    
+    //      
+    //    }
+
     return output;
     
   }
 
   //look for all neighbours in given radius
   NodeList neighboursByRadius(Node point_, float radius_) {
+    
+    /*
+    
+    Throughout the searching for # of neighbpurs, you have to compare
+    the worst distance out of n-bests, while searching by radius —
+    radius itself (r2).
+     
+    */
 
     NodeList output = new NodeList();
 
