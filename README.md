@@ -1,6 +1,6 @@
 <h1><b>HYNKY-DORYS</b></h1><br>
 <i>by Vladimir V. KUCHINOV<br>
-2015</i><br><br>
+2015-2016</i><br><br>
 
 [a collection of useful classes for Processing 2.x / 3.x]<br><br>
 
