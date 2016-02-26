@@ -49,11 +49,38 @@ class AgentList extends ArrayList<Agent>{
         for(int a = 0; a < this.size(); a++){ if(a_ != this.get(a)) { stroke(0); strokeWeight(0.5); line(a_.position.x, a_.position.y, this.get(a).position.x, this.get(a).position.y); } } 
      
     }
+    
+    void connectAgents(Agent a_, int K_){
+     
+        if(this.size() >= K_) for(int a = 0; a < K_; a++){ if(a_ != this.get(a)) { stroke(0); strokeWeight(0.5); line(a_.position.x, a_.position.y, this.get(a).position.x, this.get(a).position.y); } } 
+     
+    }
+    
      
     void connectAgents(Agent a_, float radius_){
      
         for(int a = 0; a < this.size(); a++){ if(PVector.dist(a_.position, this.get(a).position) < radius_ && a_ != this.get(a)) { stroke(0); strokeWeight(0.5); line(a_.position.x, a_.position.y, this.get(a).position.x, this.get(a).position.y); } } 
      
+    }
+    
+    void sortByDistance(Agent a_){
+     
+        //bubble sort
+        for(int i = 0; i < this.size(); i++) {
+            for(int j = i + 1; j < this.size(); j++) {
+            
+                Agent tmp;
+                if(PVector.dist(a_.position, this.get(i).position) > PVector.dist(a_.position, this.get(j).position)) {
+                  
+                    tmp = this.get(i);
+                    this.set(i, this.get(j));
+                    this.set(j, tmp);
+                    
+                }
+          
+            }
+        }
+      
     }
 
 }

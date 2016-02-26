@@ -187,10 +187,10 @@ static final int MAX_LEVELS = 6;
         neighboursByRadius(a_, worstDistance, neighbours);
         
         //sort neighbourst by distance
-        AgentList sorted = sortByDistance(a_, K_, neighbours);
+        neighbours.sortByDistance(a_);
         
         //select and highlight all apropriate neighbours
-        sorted.connectAgents(a_);
+        neighbours.connectAgents(a_, K_);
 
     }
     
