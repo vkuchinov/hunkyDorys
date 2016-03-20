@@ -14,6 +14,15 @@
      JavaScript example by Ubilabs does.
      
      And my script does. 
+     
+ UPDATED: DECEMBER, 2015
+ 
+ Implement QuadTree 'goes-up & goes-down' recursive methods to search KD-Tree with only
+ difference of checking distances by X or Y value with 'given distance'
+ 
+ Search by K would have the another logic, different from QuadTree's feed K and determine
+ worst radius. In this case, I will try dynamic radius search. I think it would be slower
+ but in the same time it's a good time to comare.
  
  */
 
