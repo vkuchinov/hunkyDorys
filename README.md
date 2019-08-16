@@ -1,4 +1,4 @@
-<h1><b>HYNKY-DORYS</b></h1><br>
+<h1><b>HUNKY-DORYS</b></h1><br>
 <i>by Vladimir V. KUCHINOV<br>
 2015-2016</i><br><br>
 
